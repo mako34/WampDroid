@@ -78,7 +78,6 @@ public class MainActivity extends ActionBarActivity {
                         Log.d("mensa", "Session status changed to " + t1);
 
 
-
                         if (t1 instanceof WampClient.ConnectedState) {
                             Log.d("mensa", "connectedStateMethods call");
 
@@ -89,6 +88,10 @@ public class MainActivity extends ActionBarActivity {
                             Log.d("mensa", "closeSubscriptions call");
 
                             closeSubscriptions();
+                        }else if (t1 instanceof WampClient.ConnectingState) {
+                            // Client starts connecting to the remote router
+                            Log.d("mensa", "ConnectingState");
+
                         }
 
                     }
