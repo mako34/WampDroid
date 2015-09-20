@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         try {
-            builder.withUri("ws://127.0.0.1:8080/ws")
+            builder.withUri("ws://10.0.2.2:8080/ws")
                     .withRealm("realm1")
                     .withInfiniteReconnects()
                     .withCloseOnErrors(true)
@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
                 });
 
         // REGISTER a procedure for remote calling
-        addProcSubscription  = client.registerProcedure("com.example.add4")
+        addProcSubscription  = client.registerProcedure("com.example.add3")
                 .observeOn(rxScheduler)
                 .subscribe(new Action1<Request>() {
                     @Override
@@ -195,25 +195,32 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void call() {
                 // PUBLISH an event
-                final int published = counter[0];
-                client.publish("com.example.oncounter", published)
-                        .observeOn(rxScheduler)
-                        .subscribe(new Action1<Long>() {
-                            @Override
-                            public void call(Long t1) {
-                                Log.d("mensa", "published to 'oncounter' with counter " + published);
+//                final int published = counter[0];
+//                client.publish("com.example.oncounter", published)
+//                        .observeOn(rxScheduler)
+//                        .subscribe(new Action1<Long>() {
+//                            @Override
+//                            public void call(Long t1) {
+//                                Log.d("mensa", "published to 'oncounter' with counter " + published);
+//
+//                                //
+//
+//                            }
+//                        }, new Action1<Throwable>() {
+//                            @Override
+//                            public void call(Throwable e) {
+//                                Log.d("mensa", "Error during publishing to 'oncounter': " + e);
+//
+//                            }
+//                        });
 
-                            }
-                        }, new Action1<Throwable>() {
-                            @Override
-                            public void call(Throwable e) {
-                                Log.d("mensa", "Error during publishing to 'oncounter': " + e);
 
-                            }
-                        });
+                Log.d("mensa", "en lope ed");
+
+
 
                 // CALL a remote procedure
-                client.call("com.example.mul2", Long.class, counter[0], 3)
+                client.call("com.example.add4", Long.class, counter[0], 3)
                         .observeOn(rxScheduler)
                         .subscribe(new Action1<Long>() {
                             @Override
