@@ -34,16 +34,18 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
+
+
+        IWampConnectorProvider connectorProvider = new NettyWampClientConnectorProvider();
+        WampClientBuilder builder = new WampClientBuilder();
+
+
         // Scheduler for this example
         ExecutorService executor = Executors.newSingleThreadExecutor();
         rxScheduler = Schedulers.from(executor);
 
         Log.d("mensa", "comenzo");
 
-        IWampConnectorProvider connectorProvider = new NettyWampClientConnectorProvider();
-
-        WampClientBuilder builder = new WampClientBuilder();
 
 
         try {
@@ -106,9 +108,11 @@ public class MainActivity extends ActionBarActivity {
 
         client.open();
 
-
-        // cuando finicta??
+//Not needed
+//        cuando finicta??
 //        waitUntilKeypressed();
+
+
 //        Log.d("mensa", "Shutting down");
 //
 //        closeSubscriptions();
